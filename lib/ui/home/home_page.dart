@@ -1,38 +1,64 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class HomePage extends StatelessWidget {
+import '../../extension/string.dart';
+import 'home_controller.dart';
+
+class HomePage extends HookConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(homeControllerProvider);
+
     return Scaffold(
-        body: CustomScrollView(
-      slivers: [
-        const CupertinoSliverNavigationBar(
-          largeTitle: Text('目録'),
-        ),
-        SliverGrid(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 1,
-            crossAxisCount: 4,
-          ),
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return const Padding(
-                padding: EdgeInsets.all(10.0),
-                child: FittedBox(
-                  fit: BoxFit.contain,
-                  child: Text(
-                    "四字\n熟語",
-                  ),
+      body: state.when(
+        data: (idioms) {
+          return CustomScrollView(
+            slivers: [
+              CupertinoSliverNavigationBar(
+                largeTitle: const Text('目録'),
+                trailing: IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: () {
+                    ref.read(homeControllerProvider.notifier).addIdiom('七転八倒');
+                  },
                 ),
-              );
-            },
-            childCount: 20,
-          ),
-        )
-      ],
-    ));
+              ),
+              SliverGrid(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 1,
+                  crossAxisCount: 4,
+                ),
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    final idiom = idioms[index];
+                    final idiomTexts = idiom.text
+                        .splitByLength((idiom.text.length / 2).floor());
+                    return Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: FittedBox(
+                        fit: BoxFit.contain,
+                        child: Column(
+                          children: [for (final text in idiomTexts) Text(text)],
+                        ),
+                      ),
+                    );
+                  },
+                  childCount: idioms.length,
+                ),
+              )
+            ],
+          );
+        },
+        error: (error, _) => Center(
+          child: Text(error.toString()),
+        ),
+        loading: () => const Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+    );
   }
 }
