@@ -20,7 +20,8 @@ class HomePage extends HookConsumerWidget {
               CupertinoSliverNavigationBar(
                 largeTitle: const Text('目録'),
                 trailing: IconButton(
-                  icon: const Icon(Icons.add),
+                  iconSize: 24,
+                  icon: const Icon(CupertinoIcons.add),
                   onPressed: () {
                     ref.read(homeControllerProvider.notifier).addIdiom('七転八倒');
                   },

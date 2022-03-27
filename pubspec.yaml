@@ -54,7 +54,8 @@ dev_dependencies:
   freezed: ^1.1.1
   build_runner: ^2.1.8
   hive_generator: ^1.1.2
-#  json_serializable: ^6.1.5
+  json_serializable: ^6.1.5
+  analyzer: ^3.4.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
