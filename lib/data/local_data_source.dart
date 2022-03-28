@@ -19,9 +19,13 @@ class LocalDataSource {
     return idiomBox.watch();
   }
 
+  Idiom? getIdiom(int id) {
+    final idiomBox = Hive.box<Idiom>(Idiom.boxKey);
+    return idiomBox.getAt(id);
+  }
+
   List<Idiom> getIdioms() {
     final idiomBox = Hive.box<Idiom>(Idiom.boxKey);
-    print(idiomBox.length);
     return idiomBox.values.toList();
   }
 

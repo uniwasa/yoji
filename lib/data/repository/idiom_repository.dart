@@ -15,6 +15,10 @@ class IdiomRepository {
     return _read(localDataSourceProvider).getIdiomBoxEvent();
   }
 
+  Idiom? getIdiom(int id) {
+    return _read(localDataSourceProvider).getIdiom(id);
+  }
+
   List<Idiom> getIdioms() {
     return _read(localDataSourceProvider).getIdioms();
   }

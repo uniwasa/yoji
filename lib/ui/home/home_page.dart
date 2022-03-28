@@ -46,9 +46,8 @@ class HomePage extends HookConsumerWidget {
                         onTap: () {
                           CupertinoScaffold.showCupertinoModalBottomSheet(
                             context: context,
-                            expand: true,
                             barrierColor: Colors.white.withOpacity(0.1),
-                            builder: (context) => const IdiomEditPage(),
+                            builder: (context) => IdiomEditPage(index),
                           );
                         },
                         child: Padding(
