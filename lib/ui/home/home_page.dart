@@ -29,37 +29,48 @@ class HomePage extends ConsumerWidget {
                   },
                 ),
               ),
-              SliverGrid(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 1,
-                  crossAxisCount: 4,
-                ),
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    final idiom = idioms[index];
-                    final idiomTexts = idiom.text
-                        .splitByLength((idiom.text.length / 2).ceil());
-                    return InkWell(
-                      onTap: () {
-                        _showCupertinoModalBottomSheet(context, index);
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: FittedBox(
-                          fit: BoxFit.contain,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              for (final text in idiomTexts) Text(text)
-                            ],
+              if (idioms.isEmpty)
+                SliverFillRemaining(
+                  child: Center(
+                    child: Text(
+                      '未登録',
+                      style: TextStyle(
+                          fontSize: 32, color: Colors.white.withOpacity(0.4)),
+                    ),
+                  ),
+                )
+              else
+                SliverGrid(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: 1,
+                    crossAxisCount: 4,
+                  ),
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      final idiom = idioms[index];
+                      final idiomTexts = idiom.text
+                          .splitByLength((idiom.text.length / 2).ceil());
+                      return InkWell(
+                        onTap: () {
+                          _showCupertinoModalBottomSheet(context, index);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: FittedBox(
+                            fit: BoxFit.contain,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                for (final text in idiomTexts) Text(text)
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                  childCount: idioms.length,
-                ),
-              )
+                      );
+                    },
+                    childCount: idioms.length,
+                  ),
+                )
             ],
           );
         },
