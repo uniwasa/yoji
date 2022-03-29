@@ -26,4 +26,12 @@ class IdiomRepository {
   void addIdiom(Idiom idiom) {
     _read(localDataSourceProvider).addIdiom(idiom);
   }
+
+  void updateIdiom(int index, Idiom idiom) {
+    _read(localDataSourceProvider).updateIdiom(index, idiom);
+  }
+
+  void deleteIdiom(int index) {
+    _read(localDataSourceProvider).deleteIdiom(index);
+  }
 }

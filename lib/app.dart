@@ -12,23 +12,29 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'yoji',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: Colors.black,
-        textTheme: GoogleFonts.shipporiMinchoTextTheme(
-          ThemeData.dark().textTheme,
-        ),
-        cupertinoOverrideTheme: const CupertinoThemeData().copyWith(
-          barBackgroundColor: Colors.black,
-          textTheme: const CupertinoTextThemeData().copyWith(
-            navLargeTitleTextStyle: GoogleFonts.shipporiMincho(
-                textStyle:
-                    const CupertinoTextThemeData().navLargeTitleTextStyle),
-            navTitleTextStyle: GoogleFonts.shipporiMincho(
-                textStyle: const CupertinoTextThemeData().navTitleTextStyle),
-          ),
+      theme: _themeData(),
+      home: const HomePage(),
+    );
+  }
+
+  ThemeData _themeData() {
+    return ThemeData.dark().copyWith(
+      scaffoldBackgroundColor: Colors.black,
+      canvasColor: Colors.black,
+      textTheme: GoogleFonts.shipporiMinchoTextTheme(
+        ThemeData.dark().textTheme,
+      ),
+      cupertinoOverrideTheme: const CupertinoThemeData().copyWith(
+        barBackgroundColor: Colors.black,
+        textTheme: const CupertinoTextThemeData().copyWith(
+          textStyle: GoogleFonts.shipporiMincho(
+              textStyle: const CupertinoTextThemeData().textStyle),
+          navLargeTitleTextStyle: GoogleFonts.shipporiMincho(
+              textStyle: const CupertinoTextThemeData().navLargeTitleTextStyle),
+          navTitleTextStyle: GoogleFonts.shipporiMincho(
+              textStyle: const CupertinoTextThemeData().navTitleTextStyle),
         ),
       ),
-      home: const HomePage(),
     );
   }
 }

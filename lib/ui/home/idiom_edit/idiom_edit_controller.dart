@@ -5,32 +5,40 @@ import '../../../data/repository/idiom_repository.dart';
 
 final idiomEditControllerProvider = StateNotifierProvider.autoDispose
     .family<IdiomEditController, AsyncValue<Idiom?>, int?>(
-        (ref, id) => IdiomEditController(ref.read, id));
+        (ref, index) => IdiomEditController(ref.read, index));
 
 class IdiomEditController extends StateNotifier<AsyncValue<Idiom?>> {
-  IdiomEditController(this._read, this._id) : super(const AsyncLoading()) {
+  IdiomEditController(this._read, this._index) : super(const AsyncLoading()) {
     init();
   }
 
   final Reader _read;
-  final int? _id;
+  final int? _index;
 
   @override
   void dispose() {
-    print('bye');
     super.dispose();
   }
 
   void init() {
-    if (_id != null) {
-      state = AsyncData(_read(idiomRepositoryProvider).getIdiom(_id!));
+    if (_index != null) {
+      state = AsyncData(_read(idiomRepositoryProvider).getIdiom(_index!));
     } else {
       state = const AsyncData(null);
     }
   }
 
-  void addIdiom(String text) {
-    final idiom = Idiom(text: text);
-    _read(idiomRepositoryProvider).addIdiom(idiom);
+  void saveIdiom(int? index, Idiom idiom) {
+    if (index != null) {
+      _read(idiomRepositoryProvider).updateIdiom(index, idiom);
+    } else {
+      _read(idiomRepositoryProvider).addIdiom(idiom);
+    }
+  }
+
+  void deleteIdiom(int? index) {
+    if (index != null) {
+      _read(idiomRepositoryProvider).deleteIdiom(index);
+    }
   }
 }

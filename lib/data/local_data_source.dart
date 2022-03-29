@@ -33,4 +33,14 @@ class LocalDataSource {
     final idiomBox = Hive.box<Idiom>(Idiom.boxKey);
     idiomBox.add(idiom);
   }
+
+  void updateIdiom(int index, Idiom idiom) {
+    final idiomBox = Hive.box<Idiom>(Idiom.boxKey);
+    idiomBox.putAt(index, idiom);
+  }
+
+  void deleteIdiom(int index) {
+    final idiomBox = Hive.box<Idiom>(Idiom.boxKey);
+    idiomBox.deleteAt(index);
+  }
 }
