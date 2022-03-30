@@ -31,6 +31,7 @@ class HomePage extends ConsumerWidget {
               ),
               if (idioms.isEmpty)
                 SliverFillRemaining(
+                  hasScrollBody: false,
                   child: Center(
                     child: Text(
                       '未登録',
