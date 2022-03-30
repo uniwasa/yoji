@@ -58,6 +58,19 @@ dev_dependencies:
   hive_generator: ^1.1.2
   json_serializable: ^6.1.5
   analyzer: ^3.4.1
+  flutter_launcher_icons: ^0.9.2
+  flutter_native_splash: ^2.1.2+1
+
+# package config
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "#000000"
+  adaptive_icon_foreground: "assets/icon/adaptive_icon.png"
+flutter_native_splash:
+  color: "#000000"
+  image: "assets/icon/splash_icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
