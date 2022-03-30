@@ -28,7 +28,10 @@ class IdiomEditPage extends ConsumerWidget {
               builder: (context) {
                 final textController =
                     useTextEditingController(text: idiom?.text ?? '');
-                final noteController = useTextEditingController();
+                final kanaController =
+                    useTextEditingController(text: idiom?.kana ?? '');
+                final noteController =
+                    useTextEditingController(text: idiom?.note ?? '');
 
                 return Padding(
                   padding: EdgeInsets.only(
@@ -63,8 +66,11 @@ class IdiomEditPage extends ConsumerWidget {
                             child: const Text('保存'),
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                final newIdiom =
-                                    Idiom(text: textController.text);
+                                final newIdiom = Idiom(
+                                  text: textController.text,
+                                  kana: kanaController.text,
+                                  note: noteController.text,
+                                );
                                 ref
                                     .read(idiomEditControllerProvider(_index)
                                         .notifier)
@@ -77,18 +83,28 @@ class IdiomEditPage extends ConsumerWidget {
                         TextFormField(
                           controller: textController,
                           autofocus: true,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (final String? value) {
-                            if (!_validateIdiom(value)) return '漢字四字で入力ください';
-                          },
+                          decoration: _inputDecoration('漢字四字'),
                           style:
                               const TextStyle(fontSize: 24, letterSpacing: 4.0),
-                          decoration: _inputDecoration('漢字四字'),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (final String? value) =>
+                              _validateIdiom(value),
                         ),
-                        TextField(
+                        TextFormField(
+                          controller: kanaController,
+                          decoration: _inputDecoration('ふりがな'),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (final String? value) =>
+                              _validateKana(value),
+                        ),
+                        TextFormField(
+                          controller: noteController,
                           minLines: 3,
                           maxLines: 3,
                           decoration: _inputDecoration('備考'),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (final String? value) =>
+                              _validateNote(value),
                         ),
                       ],
                     ),
@@ -123,8 +139,24 @@ class IdiomEditPage extends ConsumerWidget {
     );
   }
 
-  bool _validateIdiom(final String? value) {
-    if (value == null) return false;
-    return RegExp(r"^\p{Script=Hani}{4}$", unicode: true).hasMatch(value);
+  String? _validateIdiom(final String? value) {
+    if (value != null &&
+        RegExp(r"^\p{Script=Hani}{4}$", unicode: true).hasMatch(value)) {
+      return null;
+    }
+    return '漢字四字で入力ください';
+  }
+
+  String? _validateKana(final String? value) {
+    if (value != null &&
+        RegExp(r"^\p{Script=Hira}{0,40}$", unicode: true).hasMatch(value)) {
+      return null;
+    }
+    return 'ひらがな四十字以内で入力ください';
+  }
+
+  String? _validateNote(final String? value) {
+    if (value != null && value.length <= 200) return null;
+    return '二百字以内で入力ください';
   }
 }

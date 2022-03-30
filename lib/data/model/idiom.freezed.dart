@@ -22,9 +22,14 @@ Idiom _$IdiomFromJson(Map<String, dynamic> json) {
 class _$IdiomTearOff {
   const _$IdiomTearOff();
 
-  _Idiom call({@HiveField(0) required String text}) {
+  _Idiom call(
+      {@HiveField(0) required String text,
+      @HiveField(1) required String? kana,
+      @HiveField(2) required String? note}) {
     return _Idiom(
       text: text,
+      kana: kana,
+      note: note,
     );
   }
 
@@ -40,6 +45,10 @@ const $Idiom = _$IdiomTearOff();
 mixin _$Idiom {
   @HiveField(0)
   String get text => throw _privateConstructorUsedError;
+  @HiveField(1)
+  String? get kana => throw _privateConstructorUsedError;
+  @HiveField(2)
+  String? get note => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,7 +59,10 @@ mixin _$Idiom {
 abstract class $IdiomCopyWith<$Res> {
   factory $IdiomCopyWith(Idiom value, $Res Function(Idiom) then) =
       _$IdiomCopyWithImpl<$Res>;
-  $Res call({@HiveField(0) String text});
+  $Res call(
+      {@HiveField(0) String text,
+      @HiveField(1) String? kana,
+      @HiveField(2) String? note});
 }
 
 /// @nodoc
@@ -64,12 +76,22 @@ class _$IdiomCopyWithImpl<$Res> implements $IdiomCopyWith<$Res> {
   @override
   $Res call({
     Object? text = freezed,
+    Object? kana = freezed,
+    Object? note = freezed,
   }) {
     return _then(_value.copyWith(
       text: text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
+      kana: kana == freezed
+          ? _value.kana
+          : kana // ignore: cast_nullable_to_non_nullable
+              as String?,
+      note: note == freezed
+          ? _value.note
+          : note // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -79,7 +101,10 @@ abstract class _$IdiomCopyWith<$Res> implements $IdiomCopyWith<$Res> {
   factory _$IdiomCopyWith(_Idiom value, $Res Function(_Idiom) then) =
       __$IdiomCopyWithImpl<$Res>;
   @override
-  $Res call({@HiveField(0) String text});
+  $Res call(
+      {@HiveField(0) String text,
+      @HiveField(1) String? kana,
+      @HiveField(2) String? note});
 }
 
 /// @nodoc
@@ -94,12 +119,22 @@ class __$IdiomCopyWithImpl<$Res> extends _$IdiomCopyWithImpl<$Res>
   @override
   $Res call({
     Object? text = freezed,
+    Object? kana = freezed,
+    Object? note = freezed,
   }) {
     return _then(_Idiom(
       text: text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as String,
+      kana: kana == freezed
+          ? _value.kana
+          : kana // ignore: cast_nullable_to_non_nullable
+              as String?,
+      note: note == freezed
+          ? _value.note
+          : note // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -108,7 +143,10 @@ class __$IdiomCopyWithImpl<$Res> extends _$IdiomCopyWithImpl<$Res>
 @JsonSerializable()
 @HiveType(typeId: 0, adapterName: 'IdiomAdapter')
 class _$_Idiom with DiagnosticableTreeMixin implements _Idiom {
-  const _$_Idiom({@HiveField(0) required this.text});
+  const _$_Idiom(
+      {@HiveField(0) required this.text,
+      @HiveField(1) required this.kana,
+      @HiveField(2) required this.note});
 
   factory _$_Idiom.fromJson(Map<String, dynamic> json) =>
       _$$_IdiomFromJson(json);
@@ -116,10 +154,16 @@ class _$_Idiom with DiagnosticableTreeMixin implements _Idiom {
   @override
   @HiveField(0)
   final String text;
+  @override
+  @HiveField(1)
+  final String? kana;
+  @override
+  @HiveField(2)
+  final String? note;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Idiom(text: $text)';
+    return 'Idiom(text: $text, kana: $kana, note: $note)';
   }
 
   @override
@@ -127,7 +171,9 @@ class _$_Idiom with DiagnosticableTreeMixin implements _Idiom {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Idiom'))
-      ..add(DiagnosticsProperty('text', text));
+      ..add(DiagnosticsProperty('text', text))
+      ..add(DiagnosticsProperty('kana', kana))
+      ..add(DiagnosticsProperty('note', note));
   }
 
   @override
@@ -135,12 +181,17 @@ class _$_Idiom with DiagnosticableTreeMixin implements _Idiom {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Idiom &&
-            const DeepCollectionEquality().equals(other.text, text));
+            const DeepCollectionEquality().equals(other.text, text) &&
+            const DeepCollectionEquality().equals(other.kana, kana) &&
+            const DeepCollectionEquality().equals(other.note, note));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(text));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(text),
+      const DeepCollectionEquality().hash(kana),
+      const DeepCollectionEquality().hash(note));
 
   @JsonKey(ignore: true)
   @override
@@ -154,13 +205,22 @@ class _$_Idiom with DiagnosticableTreeMixin implements _Idiom {
 }
 
 abstract class _Idiom implements Idiom {
-  const factory _Idiom({@HiveField(0) required String text}) = _$_Idiom;
+  const factory _Idiom(
+      {@HiveField(0) required String text,
+      @HiveField(1) required String? kana,
+      @HiveField(2) required String? note}) = _$_Idiom;
 
   factory _Idiom.fromJson(Map<String, dynamic> json) = _$_Idiom.fromJson;
 
   @override
   @HiveField(0)
   String get text;
+  @override
+  @HiveField(1)
+  String? get kana;
+  @override
+  @HiveField(2)
+  String? get note;
   @override
   @JsonKey(ignore: true)
   _$IdiomCopyWith<_Idiom> get copyWith => throw _privateConstructorUsedError;

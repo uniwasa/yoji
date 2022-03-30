@@ -34,9 +34,4 @@ class HomeController extends StateNotifier<AsyncValue<List<Idiom>>> {
   void refresh() {
     state = AsyncData(_read(idiomRepositoryProvider).getIdioms());
   }
-
-  void addIdiom(String text) {
-    final idiom = Idiom(text: text);
-    _read(idiomRepositoryProvider).addIdiom(idiom);
-  }
 }

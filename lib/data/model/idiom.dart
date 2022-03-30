@@ -12,6 +12,8 @@ class Idiom with _$Idiom {
   @HiveType(typeId: 0, adapterName: 'IdiomAdapter')
   const factory Idiom({
     @HiveField(0) required String text,
+    @HiveField(1) required String? kana,
+    @HiveField(2) required String? note,
   }) = _Idiom;
 
   factory Idiom.fromJson(Map<String, dynamic> json) => _$IdiomFromJson(json);

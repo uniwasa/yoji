@@ -18,15 +18,21 @@ class IdiomAdapter extends TypeAdapter<_$_Idiom> {
     };
     return _$_Idiom(
       text: fields[0] as String,
+      kana: fields[1] as String?,
+      note: fields[2] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_Idiom obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.text);
+      ..write(obj.text)
+      ..writeByte(1)
+      ..write(obj.kana)
+      ..writeByte(2)
+      ..write(obj.note);
   }
 
   @override
@@ -46,8 +52,12 @@ class IdiomAdapter extends TypeAdapter<_$_Idiom> {
 
 _$_Idiom _$$_IdiomFromJson(Map<String, dynamic> json) => _$_Idiom(
       text: json['text'] as String,
+      kana: json['kana'] as String?,
+      note: json['note'] as String?,
     );
 
 Map<String, dynamic> _$$_IdiomToJson(_$_Idiom instance) => <String, dynamic>{
       'text': instance.text,
+      'kana': instance.kana,
+      'note': instance.note,
     };

@@ -36,7 +36,7 @@ class HomePage extends ConsumerWidget {
                     child: Text(
                       '未登録',
                       style: TextStyle(
-                          fontSize: 32, color: Colors.white.withOpacity(0.4)),
+                          fontSize: 24, color: Colors.white.withOpacity(0.4)),
                     ),
                   ),
                 )
