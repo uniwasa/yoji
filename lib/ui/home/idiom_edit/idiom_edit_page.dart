@@ -8,19 +8,19 @@ import 'package:yoji/data/model/idiom.dart';
 import 'package:yoji/ui/home/idiom_edit/idiom_edit_controller.dart';
 
 class IdiomEditPage extends ConsumerWidget {
-  IdiomEditPage(this._index, {Key? key}) : super(key: key);
+  const IdiomEditPage(this._index, {Key? key}) : super(key: key);
 
   final int? _index;
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(idiomEditControllerProvider(_index));
+    final formKey = ref.watch(_formKeyProvider);
 
     return Material(
       color: Colors.black,
       child: Form(
-        key: _formKey,
+        key: formKey,
         child: SafeArea(
           top: false,
           child: state.when(
@@ -65,7 +65,7 @@ class IdiomEditPage extends ConsumerWidget {
                             padding: EdgeInsets.zero,
                             child: const Text('保存'),
                             onPressed: () {
-                              if (_formKey.currentState!.validate()) {
+                              if (formKey.currentState!.validate()) {
                                 final newIdiom = Idiom(
                                   text: textController.text,
                                   kana: kanaController.text,
@@ -160,3 +160,5 @@ class IdiomEditPage extends ConsumerWidget {
     return '二百字以内で入力ください';
   }
 }
+
+final _formKeyProvider = Provider.autoDispose((ref) => GlobalKey<FormState>());
