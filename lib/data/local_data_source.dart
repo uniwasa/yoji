@@ -19,9 +19,9 @@ class LocalDataSource {
     return idiomBox.watch();
   }
 
-  Idiom? getIdiom(int id) {
+  Idiom? getIdiom(int idiomKey) {
     final idiomBox = Hive.box<Idiom>(Idiom.boxKey);
-    return idiomBox.getAt(id);
+    return idiomBox.get(idiomKey);
   }
 
   List<Idiom> getIdioms() {
@@ -34,13 +34,12 @@ class LocalDataSource {
     idiomBox.add(idiom);
   }
 
-  void updateIdiom(int index, Idiom idiom) {
+  void updateIdiom(int idiomKey, Idiom idiom) {
     final idiomBox = Hive.box<Idiom>(Idiom.boxKey);
-    idiomBox.putAt(index, idiom);
+    idiomBox.put(idiomKey, idiom);
   }
 
-  void deleteIdiom(int index) {
-    final idiomBox = Hive.box<Idiom>(Idiom.boxKey);
-    idiomBox.deleteAt(index);
+  void deleteIdiom(Idiom idiom) {
+    idiom.delete();
   }
 }

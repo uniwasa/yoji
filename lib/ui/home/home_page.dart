@@ -49,11 +49,12 @@ class HomePage extends ConsumerWidget {
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                       final idiom = idioms[index];
+                      final idiomKey = idiom.key as int;
                       final idiomTexts = idiom.text
                           .splitByLength((idiom.text.length / 2).ceil());
                       return InkWell(
                         onTap: () {
-                          _showCupertinoModalBottomSheet(context, index);
+                          _showCupertinoModalBottomSheet(context, idiomKey);
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
@@ -86,12 +87,12 @@ class HomePage extends ConsumerWidget {
   }
 
   Future<T?> _showCupertinoModalBottomSheet<T>(
-      BuildContext context, int? index) {
+      BuildContext context, int? idiomKey) {
     return showCupertinoModalBottomSheet(
       context: context,
       expand: false,
       barrierColor: Colors.white.withOpacity(0.1),
-      builder: (context) => IdiomEditPage(index),
+      builder: (context) => IdiomEditPage(idiomKey),
     );
   }
 }

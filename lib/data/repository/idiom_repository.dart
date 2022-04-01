@@ -15,8 +15,8 @@ class IdiomRepository {
     return _read(localDataSourceProvider).getIdiomBoxEvent();
   }
 
-  Idiom? getIdiom(int id) {
-    return _read(localDataSourceProvider).getIdiom(id);
+  Idiom? getIdiom(int idiomKey) {
+    return _read(localDataSourceProvider).getIdiom(idiomKey);
   }
 
   List<Idiom> getIdioms() {
@@ -27,11 +27,11 @@ class IdiomRepository {
     _read(localDataSourceProvider).addIdiom(idiom);
   }
 
-  void updateIdiom(int index, Idiom idiom) {
-    _read(localDataSourceProvider).updateIdiom(index, idiom);
+  void updateIdiom(int idiomKey, Idiom idiom) {
+    _read(localDataSourceProvider).updateIdiom(idiomKey, idiom);
   }
 
-  void deleteIdiom(int index) {
-    _read(localDataSourceProvider).deleteIdiom(index);
+  void deleteIdiom(Idiom idiom) {
+    _read(localDataSourceProvider).deleteIdiom(idiom);
   }
 }

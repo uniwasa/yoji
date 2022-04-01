@@ -5,15 +5,16 @@ import '../../../data/repository/idiom_repository.dart';
 
 final idiomEditControllerProvider = StateNotifierProvider.autoDispose
     .family<IdiomEditController, AsyncValue<Idiom?>, int?>(
-        (ref, index) => IdiomEditController(ref.read, index));
+        (ref, idiomKey) => IdiomEditController(ref.read, idiomKey));
 
 class IdiomEditController extends StateNotifier<AsyncValue<Idiom?>> {
-  IdiomEditController(this._read, this._index) : super(const AsyncLoading()) {
+  IdiomEditController(this._read, this._idiomKey)
+      : super(const AsyncLoading()) {
     init();
   }
 
   final Reader _read;
-  final int? _index;
+  final int? _idiomKey;
 
   @override
   void dispose() {
@@ -21,24 +22,30 @@ class IdiomEditController extends StateNotifier<AsyncValue<Idiom?>> {
   }
 
   void init() {
-    if (_index != null) {
-      state = AsyncData(_read(idiomRepositoryProvider).getIdiom(_index!));
+    if (_idiomKey != null) {
+      state = AsyncData(_read(idiomRepositoryProvider).getIdiom(_idiomKey!));
     } else {
       state = const AsyncData(null);
     }
   }
 
-  void saveIdiom(int? index, Idiom idiom) {
-    if (index != null) {
-      _read(idiomRepositoryProvider).updateIdiom(index, idiom);
+  void saveIdiom(
+    Idiom? idiom, {
+    required String text,
+    required String kana,
+    required String note,
+  }) {
+    final newIdiom = Idiom(text: text,kana: kana,note: note);
+    if (idiom != null) {
+      _read(idiomRepositoryProvider)
+          .updateIdiom(idiom.key,newIdiom);
     } else {
-      _read(idiomRepositoryProvider).addIdiom(idiom);
+      _read(idiomRepositoryProvider)
+          .addIdiom(newIdiom);
     }
   }
 
-  void deleteIdiom(int? index) {
-    if (index != null) {
-      _read(idiomRepositoryProvider).deleteIdiom(index);
-    }
+  void deleteIdiom(Idiom idiom) {
+      _read(idiomRepositoryProvider).deleteIdiom(idiom);
   }
 }

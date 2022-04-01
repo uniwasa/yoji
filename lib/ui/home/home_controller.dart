@@ -36,6 +36,6 @@ class HomeController extends StateNotifier<AsyncValue<List<Idiom>>> {
   }
 
   List<Idiom> _getIdioms() {
-    return _read(idiomRepositoryProvider).getIdioms();
+    return _read(idiomRepositoryProvider).getIdioms().reversed.toList();
   }
 }

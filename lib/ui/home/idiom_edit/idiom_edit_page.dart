@@ -3,17 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:yoji/data/model/idiom.dart';
 import 'package:yoji/ui/home/idiom_edit/idiom_edit_controller.dart';
 
 class IdiomEditPage extends ConsumerWidget {
-  const IdiomEditPage(this._index, {Key? key}) : super(key: key);
+  const IdiomEditPage(this._idiomKey, {Key? key}) : super(key: key);
 
-  final int? _index;
+  final int? _idiomKey;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(idiomEditControllerProvider(_index));
+    final state = ref.watch(idiomEditControllerProvider(_idiomKey));
     final formKey = ref.watch(_formKeyProvider);
 
     return Material(
@@ -42,20 +41,22 @@ class IdiomEditPage extends ConsumerWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         CupertinoNavigationBar(
-                          middle: Text(_index == null ? '追加' : '編集'),
+                          middle: Text(_idiomKey == null ? '追加' : '編集'),
                           automaticallyImplyLeading: false,
-                          leading: _index != null
+                          leading: _idiomKey != null
                               ? CupertinoButton(
                                   padding: EdgeInsets.zero,
                                   child: Text('削除',
                                       style: TextStyle(
                                           color: Theme.of(context).errorColor)),
                                   onPressed: () {
-                                    ref
-                                        .read(
-                                            idiomEditControllerProvider(_index)
-                                                .notifier)
-                                        .deleteIdiom(_index);
+                                    if (idiom != null) {
+                                      ref
+                                          .read(idiomEditControllerProvider(
+                                                  _idiomKey)
+                                              .notifier)
+                                          .deleteIdiom(idiom);
+                                    }
                                     Navigator.pop(context);
                                   },
                                 )
@@ -65,15 +66,13 @@ class IdiomEditPage extends ConsumerWidget {
                             child: const Text('保存'),
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
-                                final newIdiom = Idiom(
-                                  text: textController.text,
-                                  kana: kanaController.text,
-                                  note: noteController.text,
-                                );
                                 ref
-                                    .read(idiomEditControllerProvider(_index)
+                                    .read(idiomEditControllerProvider(_idiomKey)
                                         .notifier)
-                                    .saveIdiom(_index, newIdiom);
+                                    .saveIdiom(idiom,
+                                        text: textController.text,
+                                        kana: kanaController.text,
+                                        note: noteController.text);
                                 Navigator.pop(context);
                               }
                             },
