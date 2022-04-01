@@ -141,12 +141,12 @@ class __$IdiomCopyWithImpl<$Res> extends _$IdiomCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 0, adapterName: 'IdiomAdapter')
-class _$_Idiom with DiagnosticableTreeMixin implements _Idiom {
-  const _$_Idiom(
+class _$_Idiom extends _Idiom with DiagnosticableTreeMixin {
+  _$_Idiom(
       {@HiveField(0) required this.text,
       @HiveField(1) required this.kana,
-      @HiveField(2) required this.note});
+      @HiveField(2) required this.note})
+      : super._();
 
   factory _$_Idiom.fromJson(Map<String, dynamic> json) =>
       _$$_IdiomFromJson(json);
@@ -204,11 +204,12 @@ class _$_Idiom with DiagnosticableTreeMixin implements _Idiom {
   }
 }
 
-abstract class _Idiom implements Idiom {
-  const factory _Idiom(
+abstract class _Idiom extends Idiom {
+  factory _Idiom(
       {@HiveField(0) required String text,
       @HiveField(1) required String? kana,
       @HiveField(2) required String? note}) = _$_Idiom;
+  _Idiom._() : super._();
 
   factory _Idiom.fromJson(Map<String, dynamic> json) = _$_Idiom.fromJson;
 

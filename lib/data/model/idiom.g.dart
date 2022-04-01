@@ -6,17 +6,17 @@ part of 'idiom.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class IdiomAdapter extends TypeAdapter<_$_Idiom> {
+class IdiomAdapter extends TypeAdapter<Idiom> {
   @override
   final int typeId = 0;
 
   @override
-  _$_Idiom read(BinaryReader reader) {
+  Idiom read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return _$_Idiom(
+    return Idiom(
       text: fields[0] as String,
       kana: fields[1] as String?,
       note: fields[2] as String?,
@@ -24,7 +24,7 @@ class IdiomAdapter extends TypeAdapter<_$_Idiom> {
   }
 
   @override
-  void write(BinaryWriter writer, _$_Idiom obj) {
+  void write(BinaryWriter writer, Idiom obj) {
     writer
       ..writeByte(3)
       ..writeByte(0)

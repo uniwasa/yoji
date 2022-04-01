@@ -28,10 +28,14 @@ class HomeController extends StateNotifier<AsyncValue<List<Idiom>>> {
   }
 
   void init() {
-    state = AsyncData(_read(idiomRepositoryProvider).getIdioms());
+    state = AsyncData(_getIdioms());
   }
 
   void refresh() {
-    state = AsyncData(_read(idiomRepositoryProvider).getIdioms());
+    state = AsyncData(_getIdioms());
+  }
+
+  List<Idiom> _getIdioms() {
+    return _read(idiomRepositoryProvider).getIdioms();
   }
 }

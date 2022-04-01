@@ -6,11 +6,12 @@ part 'idiom.freezed.dart';
 part 'idiom.g.dart';
 
 @freezed
-class Idiom with _$Idiom {
+@HiveType(typeId: 0)
+class Idiom extends HiveObject with _$Idiom {
   static const String boxKey = 'idiom';
 
-  @HiveType(typeId: 0, adapterName: 'IdiomAdapter')
-  const factory Idiom({
+  Idiom._();
+  factory Idiom({
     @HiveField(0) required String text,
     @HiveField(1) required String? kana,
     @HiveField(2) required String? note,
