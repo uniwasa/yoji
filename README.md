@@ -1,16 +1,8 @@
 # yoji
 
-A new Flutter project.
+漢字四字しか入力できないメモ帳。
+データベースにはHive使用。
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+| 一覧画面 | 編集画面 |
+| :----: | :----: |
+| ![一覧](https://user-images.githubusercontent.com/10914919/161419729-ad0964ee-1902-48d8-bb43-ff63f25e62bc.png) | ![編集](https://user-images.githubusercontent.com/10914919/161419782-b07b4266-0af1-4e3b-a6b5-4736f5501f95.png) |
