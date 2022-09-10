@@ -1,3 +1,7 @@
 {
-    "dart.flutterSdkPath": "~/.asdf/installs/flutter/3.3.0-stable"
+    "dart.flutterSdkPath": "~/.asdf/installs/flutter/3.3.0-stable",
+    "workbench.colorCustomizations": {
+        "titleBar.activeBackground": "#689d6a",
+        "titleBar.inactiveBackground": "#689d6a",
+    }
 }
