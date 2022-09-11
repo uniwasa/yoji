@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:yoji/page/home/home_page.dart';
+import 'package:yoji/page/login/login_page.dart';
 
 final routerProvider = Provider(
   (ref) => GoRouter(
@@ -9,6 +10,11 @@ final routerProvider = Provider(
         path: '/',
         name: 'home',
         builder: (context, state) => const HomePage(),
+      ),
+      GoRoute(
+        path: '/login',
+        name: 'login',
+        builder: (context, state) => const LoginPage(),
       ),
     ],
   ),
