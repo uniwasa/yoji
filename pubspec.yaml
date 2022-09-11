@@ -16,6 +16,7 @@ dependencies:
   flutter_hooks: ^0.18.5+1
   hooks_riverpod: ^1.0.4
   flutter_dotenv: ^5.0.2
+  supabase_flutter: ^1.0.0-dev.6
 
 dev_dependencies:
   flutter_test:
