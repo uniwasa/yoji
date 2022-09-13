@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(),
       body: const Center(child: Text('home')),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.push('/login'),
+        onPressed: () => context.go('/login'),
       ),
     );
   }

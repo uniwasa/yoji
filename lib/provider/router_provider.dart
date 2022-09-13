@@ -26,11 +26,12 @@ final routerProvider = Provider(
         ),
       ],
       redirect: (state) {
+        print(ref.read(authProvider.notifier).isLoggedIn);
         print('リダイレクト');
         print(state.subloc);
         return null;
       },
-      refreshListenable: GoRouterRefreshStream(ref.watch(authProvider.notifier).stream),
+      refreshListenable: GoRouterRefreshStream(ref.read(authProvider.notifier).stream),
     );
   },
 );

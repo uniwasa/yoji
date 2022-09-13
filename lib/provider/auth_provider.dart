@@ -8,6 +8,7 @@ final authProvider = StateNotifierProvider<AuthNotifier, AsyncValue<Session>>(
 class AuthNotifier extends StateNotifier<AsyncValue<Session>> {
   final Reader _read;
   late final GotrueSubscription _onAuthStateListener;
+  bool get isLoggedIn => state.valueOrNull != null;
 
   AuthNotifier({required Reader read})
       : _read = read,
