@@ -26,9 +26,13 @@ final routerProvider = Provider(
         ),
       ],
       redirect: (state) {
-        print(ref.read(authProvider.notifier).isLoggedIn);
-        print('リダイレクト');
-        print(state.subloc);
+        final isLoggedIn = ref.read(authProvider.notifier).isLoggedIn;
+        final isGoingToLogIn = state.subloc == '/login';
+        // ログインしてない場合
+        if (!isLoggedIn) return isGoingToLogIn ? null : '/login';
+        // ログインしてるのにログイン画面にいる場合
+        if (isGoingToLogIn) return '/';
+        // リダイレクト不要
         return null;
       },
       refreshListenable: GoRouterRefreshStream(ref.read(authProvider.notifier).stream),
